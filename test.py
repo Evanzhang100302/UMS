@@ -22,14 +22,12 @@ if "CUDA_VISIBLE_DEVICES" not in os.environ:
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
-from DSTPP import Transformer_ST as _Transformer_ST_Base
+from encoder import Transformer_ST as _Transformer_ST_Base, get_dataloader
 
 class Transformer_ST(_Transformer_ST_Base):
     def forward(self, event_loc, event_time):
         enc_output_all, non_pad_mask = super().forward(event_loc, event_time)
         return enc_output_all[:, :, :128], non_pad_mask
-from DSTPP.Dataset import get_dataloader
 from model_mm import Model_all_MM, GaussianDiffusion_MM, ST_Diffusion_MM, ImageProjector
 
 def normalization(x, MAX, MIN): return (x - MIN) / (MAX - MIN)

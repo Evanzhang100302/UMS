@@ -8,14 +8,12 @@ from torch.utils.tensorboard import SummaryWriter
 import setproctitle
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from DSTPP import Transformer_ST as _Transformer_ST_Base
+from encoder import Transformer_ST as _Transformer_ST_Base, get_dataloader
 
 class Transformer_ST(_Transformer_ST_Base):
-    """Drop the joint enc_output; return only temporal (64) + spatial (64) = 128-d."""
     def forward(self, event_loc, event_time):
         enc_output_all, non_pad_mask = super().forward(event_loc, event_time)
         return enc_output_all[:, :, :128], non_pad_mask
-from DSTPP.Dataset import get_dataloader
 from model_mm import ST_Diffusion_MM, GaussianDiffusion_MM, Model_all_MM, ImageProjector
 
 def get_args():
