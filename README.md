@@ -1,4 +1,4 @@
-# UMS: Uncertainty-aware Multimodal Spatiotemporal Point Process
+# Uncertainty-aware Multi-modality Spatio-temporal Wildfire and Smoke Prediction
 
 Code for the SIGSPATIAL 2026 submission.
 
